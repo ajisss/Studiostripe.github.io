@@ -1,0 +1,71 @@
+<?php
+    if($username) {
+        $module = isset($_GET['module']) ? $_GET['module'] : false;
+        $action = isset($_GET['action']) ? $_GET['action'] : false;
+        $mode = isset($_GET['mode']) ? $_GET['mode'] : false;
+    } else {
+        header("location: ".BASE_URL."index.php?page=login");
+    }
+
+?>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas" data-bs-keyboard="false" data-bs-backdrop="false" style="width: 200px">
+    <div class="offcanvas-header">
+        <h6 class="offcanvas-title d-none d-sm-block" id="offcanvas">Menu Admin</h6>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body px-0">
+        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-start" id="menu">
+            <li class="nav-item">
+                <a href="<?php echo BASE_URL."index.php?page=userrs"; ?>" class="nav-link text-truncate">
+                    <i class="fs-5 bi-house"></i><span class="ms-1 d-none d-sm-inline">Utama</span>
+                </a>
+            </li>
+            <li>
+            <li>
+                <a href="<?php echo BASE_URL."index.php?page=dashboard&module=pengguna&action=list"; ?>"class="nav-link text-truncate">
+                    <i class="fs-5 bi-people"></i><span class="ms-1 d-none d-sm-inline">Pengguna</span> </a>
+            </li>
+            <li>
+                <a href="<?php echo BASE_URL."index.php?page=dashboard&module=jadwal&action=list"; ?>" class="nav-link text-truncate">
+                    <i class="fs-5 bi-table"></i><span class="ms-1 d-none d-sm-inline">Jadwal</span></a>
+            
+            <li>
+                <a href="<?php echo BASE_URL."index.php?page=dashboard&module=booking&action=list"; ?>" class="nav-link text-truncate">
+                    <i class="fs-5 bi-inboxes-fill"></i><span class="ms-1 d-none d-sm-inline">Booking</span></a>
+            </li>
+            <li>
+                <a href="<?php echo BASE_URL."index.php?page=dashboard&module=studio&action=list"; ?>"class="nav-link text-truncate">
+                    <i class="fs-5 bi-door-closed-fill"></i><span class="ms-1 d-none d-sm-inline">Studio</span> </a>
+            </li>
+            <li>
+                <a href="#"class="nav-link text-truncate">
+                    <i class="fs-5 bi-cash"></i><span class="ms-1 d-none d-sm-inline">Pembayaran</span> </a>
+            </li>
+            <li>
+                <a href="<?php echo BASE_URL."index.php?page=dashboard&module=laporan&action=list"; ?>"class="nav-link text-truncate">
+                    <i class="fs-5 bi-clipboard"></i><span class="ms-1 d-none d-sm-inline">Laporan</span> </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col min-vh-100 py-3">
+            <!-- toggler -->
+            <button class="btn float-end" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" role="button">
+                <i class="bi bi-arrow-right-square-fill fs-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"></i>
+            </button>
+                    <?php
+                        $file = "module/$module/$action.php";
+                            if(file_exists($file)) {
+                                include_once($file);
+                            } else {
+                                echo "<h3>Halaman Belum Ada</h3>";
+                            }
+                      ?>
+        </div>
+    </div>
+          
+</div>
